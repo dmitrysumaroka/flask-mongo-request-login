@@ -5,13 +5,14 @@ Created becasue I wanted to use flask to authenticate my user without forms whil
 
 Right now it authenticates based on username. This is an easy switch. In user_registration, replace in the login function `user = app.mongo.db.user.find_one({"username": username})` with `user = app.mongo.db.user.find_one({"email": email})` and make sure to pass in email and get the email from request.
 
-//Register User
+#Register User
 `data = {"username": "myUser", "password":"myPass", "email": "d@d.com" }`
 `post("http://127.0.0.1:5000/register", json=data).json()`
 
 If succsessful then the json responce will be `{ 'success' : true, 'userId': '734891274389012', 'responce': "User saved"}`
 
-//Login
+#Login
+
 `login = {"username":"myUser", "password": "myPass"}`
 `post("http://127.0.0.1:5000/login", json=login).json()`
 
@@ -19,8 +20,10 @@ If succsessful then the json responce will be `{ 'success' : true, 'sessionId': 
 Save the sessionId for later use in your headers.
 
 
+#Check to see if you can authenticate
+
 Use base64 encoding for the sessionId when passing it in your headers. Add that header to access anything that is `@login_required`.
-//Check to see if you can authenticate
+
 `headers={'Authorization': 'Basic ' + base64.b64encode(bytes('73333333334891274389012', 'utf-8')}
 get("http://127.0.0.1:5000/write", headers=headers )`
 
