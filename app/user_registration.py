@@ -2,7 +2,7 @@
 # @Author: Dima Sumaroka
 # @Date:   2017-01-23 13:08:19
 # @Last Modified by:   Dima Sumaroka
-# @Last Modified time: 2017-02-06 11:10:36
+# @Last Modified time: 2017-02-08 14:15:54
 
 from app import app, lm
 from flask import request, session
@@ -115,8 +115,6 @@ def new_user():
     username = request.json.get('username')
     password = request.json.get('password')
     email = request.json.get('email')
-    location = request.json.get("location")
-    radius = request.json.get("radius")
 
     if username is None or password is None:
         response["response"] = "username or pass not provided"
@@ -130,7 +128,6 @@ def new_user():
     user.username = username
     user.hash_password(password = password)
     user.set_email(email = email)
-    user.set_radius(radius)
 
     if user.save():
         response["success"] = True

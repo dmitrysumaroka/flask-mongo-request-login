@@ -2,7 +2,7 @@
 # @Author: Dima Sumaroka
 # @Date:   2017-01-23 13:06:16
 # @Last Modified by:   Dima Sumaroka
-# @Last Modified time: 2017-02-06 11:12:55
+# @Last Modified time: 2017-02-08 14:16:00
 
 from werkzeug.security import check_password_hash, generate_password_hash
 from passlib.apps import custom_app_context as pwd_context
@@ -47,10 +47,6 @@ class User():
         userObj.email = user['email']
         userObj.password_hash = user['password_hash']
         return userObj
-
-
-    def set_radius(self, radius):
-        self.radius = radius
 
     def save(self):
         self.id = app.mongo.db.user.insert({
